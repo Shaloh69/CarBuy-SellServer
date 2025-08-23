@@ -642,3 +642,62 @@ export const validateRateLimit = (
 
   next();
 };
+
+export const additionalSchemas = {
+  // Car rejection schema
+  carRejection: Joi.object({
+    reason: Joi.string().min(10).max(500).required(),
+    notes: Joi.string().max(1000).optional(),
+  }),
+
+  // Nearby search schema
+  nearbySearch: Joi.object({
+    latitude: Joi.number().min(-90).max(90).required(),
+    longitude: Joi.number().min(-180).max(180).required(),
+    radius: Joi.number().min(1).max(100).default(25),
+    limit: Joi.number().min(1).max(50).default(20),
+  }),
+
+  // Advanced search schema
+  searchCars: Joi.object({
+    query: Joi.string().max(100).optional(),
+    brand_id: Joi.number().integer().positive().optional(),
+    model_id: Joi.number().integer().positive().optional(),
+    category_id: Joi.number().integer().positive().optional(),
+    min_price: Joi.number().positive().optional(),
+    max_price: Joi.number().positive().optional(),
+    min_year: Joi.number().integer().min(1900).max(2030).optional(),
+    max_year: Joi.number().integer().min(1900).max(2030).optional(),
+    max_mileage: Joi.number().integer().min(0).optional(),
+    fuel_type: Joi.string().optional(),
+    transmission: Joi.string().optional(),
+    condition_rating: Joi.string().optional(),
+    city_id: Joi.number().integer().positive().optional(),
+    province_id: Joi.number().integer().positive().optional(),
+    region_id: Joi.number().integer().positive().optional(),
+    latitude: Joi.number().min(-90).max(90).optional(),
+    longitude: Joi.number().min(-180).max(180).optional(),
+    radius: Joi.number().min(1).max(100).optional(),
+    seller_rating_min: Joi.number().min(1).max(5).optional(),
+    verified_sellers_only: Joi.boolean().optional(),
+    has_images: Joi.boolean().optional(),
+    featured_first: Joi.boolean().optional(),
+    page: Joi.number().integer().min(1).default(1),
+    limit: Joi.number().integer().min(1).max(100).default(20),
+    sort_by: Joi.string()
+      .valid(
+        "newest",
+        "price_low",
+        "price_high",
+        "year_new",
+        "year_old",
+        "mileage_low",
+        "rating",
+        "views"
+      )
+      .optional(),
+    include_images: Joi.boolean().optional(),
+    include_features: Joi.boolean().optional(),
+    include_seller: Joi.boolean().optional(),
+  }),
+};
