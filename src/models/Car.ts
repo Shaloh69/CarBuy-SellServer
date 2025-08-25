@@ -182,6 +182,9 @@ export interface CreateCarData {
 }
 
 export interface UpdateCarData {
+  last_price_update: Date;
+  quality_score: number;
+  completeness_score: number;
   title?: string;
   description?: string;
   price?: number;
