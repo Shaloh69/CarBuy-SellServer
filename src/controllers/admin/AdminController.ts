@@ -1,6 +1,6 @@
 // src/controllers/admin/AdminController.ts
 import { Request, Response } from "express";
-import { DatabaseManager } from "../../config/database";
+import DatabaseManager from "../../config/database";
 import {
   asyncHandler,
   NotFoundError,
